@@ -9,10 +9,10 @@ export const VISION_WASM = `${BASE}mediapipe/wasm`;
 export const CAMERA = { width: 640, height: 480, maxFps: 24 };
 // 이 설정은 모델의 실제 리깅을 바꾸는 게 아니라 화면 밖으로 아랫부분을 밀어내는 크롭이다.
 export const FRAMING = {
-  heightFactor: 1.37,
-  centerY: 0.69,
+  heightFactor: 1.1,
+  centerY: 0.6,
   centerX: 0.50,
-  minWidthFactor: 0.65,
+  minWidthFactor: 0.3,
 
   mobile: {
     heightFactor: 0.9,
