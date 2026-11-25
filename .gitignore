@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.DS_Store
+# Cubism Core has its own proprietary license. Do not commit it without checking the license.
+public/vendor/live2dcubismcore.min.js
+public/vendor/live2dcubismcore-v6.min.js
+public/mediapipe/wasm/
+public/mediapipe/face_landmarker.task

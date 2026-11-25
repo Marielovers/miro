@@ -1,0 +1,45 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "avatar.moc3",
+    "Textures": [
+      "textures/texture_00.png"
+    ],
+    "DisplayInfo": "avatar.cdi3.json",
+    "Physics": "avatar.physics3.json"
+  },
+  "Groups": [
+    {
+      "Target": "Parameter",
+      "Name": "EyeBlink",
+      "Ids": []
+    },
+    {
+      "Target": "Parameter",
+      "Name": "LipSync",
+      "Ids": []
+    }
+  ],
+  "HitAreas": [
+    {
+      "Id": "HitAreariibbon",
+      "Name": "Hitarearibbon"
+    },
+    {
+      "Id": "HitAreahead",
+      "Name": "Hitareahead"
+    },
+    {
+      "Id": "HitArealeft",
+      "Name": "Hitarealeft"
+    },
+    {
+      "Id": "HitArearight",
+      "Name": "Hitarearight"
+    },
+    {
+      "Id": "HitArea",
+      "Name": "Hitarea"
+    }
+  ]
+}

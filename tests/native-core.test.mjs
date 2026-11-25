@@ -1,0 +1,48 @@
+// Actual Cubism Core + installed renderer integration, without WebGL drawing.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import { AvatarController } from '../src/controller.js';
+import { DragInteraction } from '../src/drag.js';
+import { SENSITIVITY } from '../src/config.js';
+const corePath=new URL('../public/vendor/live2dcubismcore-v6.min.js',import.meta.url);
+const dir=new URL('../public/live2d/avatar/',import.meta.url);
+test('real MOC3 + native physics + renderer update: release reaches 2 and head movement changes physical output', {skip:!fs.existsSync(corePath)}, async()=>{
+  const sandbox={console,WebAssembly,Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Float32Array,Float64Array,ArrayBuffer,Math,Date,TextDecoder,TextEncoder,setTimeout,clearTimeout,performance,atob,btoa};
+  vm.createContext(sandbox); vm.runInContext(fs.readFileSync(corePath,'utf8'),sandbox);
+  globalThis.Live2DCubismCore=sandbox.Live2DCubismCore;
+  globalThis.window=globalThis;
+  for (const id of ['WebGLBuffer','WebGLTexture','WebGLFramebuffer','WebGLProgram']) globalThis[id]=class {};
+  await new Promise(r=>setTimeout(r,500));
+  const e=await import('@laplace.live/pixijs-live2d'); await e.cubismReady();
+  const json=JSON.parse(fs.readFileSync(new URL('avatar.model3.json',dir),'utf8'));json.url='http://localhost/avatar.model3.json';
+  const settings=new e.CubismModelSettings(json), runtime=e.Live2DFactory.findRuntime(settings);
+  const bytes=name=>{const b=fs.readFileSync(new URL(name,dir));return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);};
+  const model=runtime.createCoreModel(bytes(json.FileReferences.Moc),{});
+  const internal=runtime.createInternalModel(model,settings,{autoInteract:false,autoUpdate:false});
+  internal.physics=runtime.createPhysics(model,bytes(json.FileReferences.Physics)); internal.eyeBlink=undefined;internal.breath=undefined;
+  assert.equal(internal.physics._physicsRig.subRigCount,11);
+  const raw=model.getModel(), p=raw.parameters, idx=id=>p.ids.indexOf(id);
+  const metadata=Object.fromEntries(Array.from(p.ids,(id,i)=>[id,{min:p.minimumValues[i],max:p.maximumValues[i],default:p.defaultValues[i]}]));
+  const read=id=>p.values[idx(id)], write=(id,v)=>{if(metadata[id])p.values[idx(id)]=Math.max(metadata[id].min,Math.min(metadata[id].max,v));};
+  const range=(id,v)=>metadata[id].min+(metadata[id].max-metadata[id].min)*(Math.max(-1,Math.min(1,v))+1)/2;
+  const avatar={internal,coreModel:model,metadata,read,write,range,unit:(id,v)=>metadata[id].min+(metadata[id].max-metadata[id].min)*v,toNormalized:(id,v)=>2*(v-metadata[id].min)/(metadata[id].max-metadata[id].min)-1,app:{screen:{width:800,height:600}},model:{hitTest:()=>['Hitarearibbon']}};
+  assert.equal(metadata.stage.max,2);
+  globalThis.innerWidth=800;globalThis.innerHeight=600;globalThis.addEventListener=()=>{};
+  const canvas={addEventListener(){},getBoundingClientRect:()=>({left:0,top:0,width:800,height:600}),setPointerCapture(){},hasPointerCapture(){return false;}};
+  const c=new AvatarController(avatar,{raw:null}), d=new DragInteraction(canvas,avatar,id=>c.cameraNormalized(id));c.bindDrag(d);
+  const event=(y,type)=>({pointerId:1,pointerType:'mouse',button:0,clientX:0,clientY:y,type,preventDefault(){}});
+  d.onDown(event(0,'pointerdown'));d.onMove(event(160,'pointermove'));
+  let now=0;const frame=()=>{now+=1000/60;internal.update(1000/60,now);};
+  frame();assert.equal(c.lastFrame.stage,1);
+  for(let i=0;i<10;i++)frame();assert.equal(c.lastFrame.stage,1);
+  const atOne=Array.from(raw.drawables.opacities);
+  d.onUp(event(160,'pointerup'));frame(); assert.ok(c.lastFrame.stage>1 && c.lastFrame.stage<2);
+  const hair=[];
+  for(let i=0;i<Math.ceil(SENSITIVITY.ribbonHoldToStage2Seconds*60)+12;i++){d.values.set('ParamAngleZ',i<6?0:.9);frame();hair.push(c.lastFrame.physics.fronthairX1);}
+  assert.equal(c.lastFrame.stage,2);assert.equal(read('stage'),2);assert.equal(d.ribbonLockedTo2,true);
+  assert.ok(Math.max(...hair)-Math.min(...hair)>1,`hair output range: ${Math.min(...hair)}..${Math.max(...hair)}`);
+  assert.ok(atOne.some((v,i)=>v!==raw.drawables.opacities[i]),'stage 2 must change drawable opacity');
+  console.log('Native integration:',{stage:read('stage'),groups:internal.physics._physicsRig.subRigCount,hairMin:Math.min(...hair),hairMax:Math.max(...hair)});
+});

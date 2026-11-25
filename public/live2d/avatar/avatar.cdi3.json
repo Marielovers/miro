@@ -1,0 +1,247 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "depth",
+			"GroupId": "",
+			"Name": "depth"
+		},
+		{
+			"Id": "stage",
+			"GroupId": "",
+			"Name": "stage"
+		},
+		{
+			"Id": "BLX",
+			"GroupId": "",
+			"Name": "BLX"
+		},
+		{
+			"Id": "BLY",
+			"GroupId": "",
+			"Name": "BLY"
+		},
+		{
+			"Id": "BRX",
+			"GroupId": "",
+			"Name": "BRX"
+		},
+		{
+			"Id": "BRY",
+			"GroupId": "",
+			"Name": "BRY"
+		},
+		{
+			"Id": "HX",
+			"GroupId": "",
+			"Name": "HX"
+		},
+		{
+			"Id": "HY",
+			"GroupId": "",
+			"Name": "HY"
+		},
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "각도 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "각도 Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "각도 Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "",
+			"Name": "왼쪽 눈 깜빡임"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "",
+			"Name": "왼쪽 눈 미소"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "",
+			"Name": "오른쪽 눈 깜빡임"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "",
+			"Name": "오른쪽 눈 미소"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "",
+			"Name": "눈 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "",
+			"Name": "눈 Y"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "",
+			"Name": "왼쪽 눈썹 위아래로"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "",
+			"Name": "오른쪽 눈썹 위아래로"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "",
+			"Name": "왼쪽 눈썹 각도"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "",
+			"Name": "오른쪽 눈썹 각도"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "",
+			"Name": "왼쪽 눈썹 변형"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "",
+			"Name": "오른쪽 눈썹 변형"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "",
+			"Name": "입 변형"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "",
+			"Name": "입 여닫기"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "",
+			"Name": "몸의 회전 X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "",
+			"Name": "몸의 회전 Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "",
+			"Name": "몸의 회전 Z"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "",
+			"Name": "호흡"
+		},
+		{
+			"Id": "fronthairX1",
+			"GroupId": "",
+			"Name": "fronthairX1"
+		},
+		{
+			"Id": "fronthairX2",
+			"GroupId": "",
+			"Name": "fronthairX2"
+		},
+		{
+			"Id": "fronthairY",
+			"GroupId": "",
+			"Name": "fronthairY"
+		},
+		{
+			"Id": "sidehairX1",
+			"GroupId": "",
+			"Name": "sidehairX1"
+		},
+		{
+			"Id": "sidehairX2",
+			"GroupId": "",
+			"Name": "sidehairX2"
+		},
+		{
+			"Id": "sidehairY",
+			"GroupId": "",
+			"Name": "sidehairY"
+		},
+		{
+			"Id": "lefthairX1",
+			"GroupId": "",
+			"Name": "lefthairX1"
+		},
+		{
+			"Id": "lefthairX2",
+			"GroupId": "",
+			"Name": "lefthairX2"
+		},
+		{
+			"Id": "lefthairY",
+			"GroupId": "",
+			"Name": "lefthairY"
+		},
+		{
+			"Id": "ahoX",
+			"GroupId": "",
+			"Name": "ahoX"
+		},
+		{
+			"Id": "ahoY",
+			"GroupId": "",
+			"Name": "ahoY"
+		},
+		{
+			"Id": "backX1",
+			"GroupId": "",
+			"Name": "backX1"
+		},
+		{
+			"Id": "backX2",
+			"GroupId": "",
+			"Name": "backX2"
+		},
+		{
+			"Id": "backY1",
+			"GroupId": "",
+			"Name": "backY1"
+		},
+		{
+			"Id": "backY2",
+			"GroupId": "",
+			"Name": "backY2"
+		},
+		{
+			"Id": "boobX1",
+			"GroupId": "",
+			"Name": "boobX1"
+		},
+		{
+			"Id": "boobX2",
+			"GroupId": "",
+			"Name": "boobX2"
+		},
+		{
+			"Id": "boobY1",
+			"GroupId": "",
+			"Name": "boobY1"
+		},
+		{
+			"Id": "boobY2",
+			"GroupId": "",
+			"Name": "boobY2"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": []
+}

@@ -1,0 +1,22 @@
+{
+  "name": "miro-live2d-face-tracker",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "node scripts/setup-assets.mjs",
+    "setup": "node scripts/setup-assets.mjs",
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.22",
+    "pixi.js": "^8.13.0",
+    "@laplace.live/pixijs-live2d": "0.6.1"
+  },
+  "devDependencies": {
+    "vite": "^6.4.6"
+  }
+}
