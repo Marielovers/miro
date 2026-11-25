@@ -9,12 +9,17 @@ export const VISION_WASM = `${BASE}mediapipe/wasm`;
 export const CAMERA = { width: 640, height: 480, maxFps: 24 };
 // 이 설정은 모델의 실제 리깅을 바꾸는 게 아니라 화면 밖으로 아랫부분을 밀어내는 크롭이다.
 export const FRAMING = {
-  // 모델 캔버스 높이를 화면 높이의 1.37배로 확대
   heightFactor: 1.37,
-  // 모델 중심을 화면 높이의 69%에 위치 -> 아랫부분은 화면 아래로 잘린다.
   centerY: 0.69,
   centerX: 0.50,
-  minWidthFactor: 0.65
+  minWidthFactor: 0.65,
+
+  mobile: {
+    heightFactor: 0.9,
+    centerY: 0.60,
+    centerX: 0.55,
+    minWidthFactor: 0.50
+  }
 };
 export const SENSITIVITY = {
   // 몸 회전 범위 대비 머리 회전의 비율 (0~1).

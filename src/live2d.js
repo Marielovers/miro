@@ -77,16 +77,44 @@ export async function createAvatar(canvas) {
     return { width: Math.max(1, rect.width), height: Math.max(1, rect.height) };
   };
   function layout() {
-    const { width, height } = getBounds();
-    app.renderer.resolution = Math.min(window.devicePixelRatio || 1, 2);
-    app.renderer.resize(width, height);
-    // 모바일 세로 화면에서도 아랫부분이 드러나지 않도록 늘 항상 아래로 오버스캔.
-    const baseScale = height * FRAMING.heightFactor / Math.max(1, internal.height);
-    const requiredWidthScale = width * FRAMING.minWidthFactor / Math.max(1, internal.width);
-    const scale = Math.max(baseScale, requiredWidthScale);
-    model.scale.set(scale);
-    model.position.set(width * FRAMING.centerX, height * FRAMING.centerY);
-  }
+  const { width, height } = getBounds();
+
+  const isMobile =
+    new URLSearchParams(location.search).has('mobile') ||
+    window.matchMedia('(pointer: coarse)').matches ||
+    width <= 768;
+
+  const framing = isMobile
+    ? { ...FRAMING, ...FRAMING.mobile }
+    : FRAMING;
+
+  app.renderer.resolution = Math.min(
+    window.devicePixelRatio || 1, 2
+  );
+
+  app.renderer.resize(width, height);
+
+  const baseScale =
+    height * framing.heightFactor /
+    Math.max(1, internal.height);
+
+  const requiredWidthScale =
+    width * framing.minWidthFactor /
+    Math.max(1, internal.width);
+
+  const scale = Math.max(baseScale, requiredWidthScale);
+
+  model.scale.set(scale);
+
+  model.position.set(
+    width * framing.centerX,
+    height * framing.centerY
+  );
+
+  console.log('[Layout]', {
+    isMobile, width, height, scale, framing
+  });
+}
   layout();
   window.addEventListener('resize', layout, { passive: true });
   window.visualViewport?.addEventListener('resize', layout, { passive: true });

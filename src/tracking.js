@@ -140,7 +140,7 @@ export function faceToControls(face, baseline) {
     eyeR: clamp(1 - Math.max(0, g('eyeBlinkRight') - SENSITIVITY.blinkDeadzone) * SENSITIVITY.blinkGain, 0, 1),
     eyeSmileL: clamp(g('cheekSquintLeft') * 0.6 + g('mouthSmileLeft') * 0.55, 0, 1),
     eyeSmileR: clamp(g('cheekSquintRight') * 0.6 + g('mouthSmileRight') * 0.55, 0, 1),
-    gazeX: clamp(face.gazeX * 2.4, -1, 1),
+    gazeX: clamp(-face.gazeX * 2.4, -1, 1),
     gazeY: clamp(face.gazeY * 2.3, -1, 1),
     browLY: clamp(g('browOuterUpLeft') * 1.4 + g('browInnerUp') * 0.65 - g('browDownLeft') * 1.5, -1, 1),
     browRY: clamp(g('browOuterUpRight') * 1.4 + g('browInnerUp') * 0.65 - g('browDownRight') * 1.5, -1, 1),
